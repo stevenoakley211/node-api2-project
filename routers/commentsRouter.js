@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post('/:id/comments', (req, res) => {
     const { id } = req.params;
-    const { text } = req.body;
+    const { text } = req.body; 
     const comment = { ...req.body, post_id: id };
     if (!text) {
       res
@@ -62,3 +62,5 @@ router.get('/:id/comments', (req, res) => {
           .json({ error: 'The comments information could not be retrieved.' });
       });
   });
+
+  module.exports = router;
