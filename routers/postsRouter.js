@@ -7,8 +7,8 @@ const router = express.Router();
 //  GET     /api/posts     Returns an array of all the post objects contained in the database.
 router.get("/",(req,res)=>{
  db.find(req.body)
-    .then( foundItems =>{
-        res.status(200).json(foundItems);
+    .then( posts =>{
+        res.status(200).json(posts);
     })
     .catch(error =>{
         console.log(error);
@@ -58,8 +58,8 @@ router.post("/",(req,res)=>{
 router.delete("/:id",(req,res)=>{
     const { id } = req.params;
     db.remove(id)
-        .then(numOfDelPost => {
-            if(numOfDelPost){
+        .then(post => {
+            if(post){
                 res.status(200).json({ message: 'The post has been deleted' })
             }
             else {
@@ -81,9 +81,9 @@ router.put("/:id",(req,res)=>{
         });
     } else {
         db.update(id, post)
-        .then(updated => {
-            if (updated) {
-            res.status(200).json(updated);
+        .then(updatedPost => {
+            if (updatedPost) {
+            res.status(200).json(updatedPost);
             } else {
             res.status(404).json({
                 message: 'The post with the specified ID does not exist.'
